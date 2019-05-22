@@ -1,5 +1,60 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 } /*"border-box" means that the width and height properties (and min/max properties) include content, padding and border*/
 
+tr:nth-child(even) {
+  background-color: #f1b59a;
+}
 
+tr:nth-child(odd) {
+  background-color: #ed9a72;
+}
+
+td,
+th {
+  border: 0px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+/*td {
+  width: 13vw;
+}*/
+
+/*td {
+  width: 20%;
+}*/
+
+td:nth-child(1),
+th:nth-child(1) {
+  padding-left: 40px;
+  padding-right: 15px;
+}
+
+td:nth-child(5),
+th:nth-child(5) {
+  padding-right: 0px;
+}
+
+td:nth-child(2),
+th:nth-child(2) {
+  text-align: left;
+  padding-left: 0px;
+}
+
+td:nth-child(1) {
+  width: 40px;
+}
+
+main {
+  background-image: url(images/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70vw;
+}
