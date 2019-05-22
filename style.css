@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 } /*"border-box" means that the width and height properties (and min/max properties) include content, padding and border*/
 
 h1 {
@@ -25,8 +26,6 @@ tr:nth-child(1) {
 td {
   width: 20%;
   color: white;
-  font-size: 1.3em;
-  font-weight: bold;
   font-style: italic;
 }
 
@@ -37,7 +36,6 @@ th {
   padding: 8px;
   color: white;
   font-size: 1.3em;
-  font-weight: bold;
 }
 
 /*td {
@@ -45,8 +43,7 @@ th {
 }*/
 
 td:nth-child(1) {
-  padding-left: 8px;
-  padding-right: 0px;
+  padding: 8px;
   text-align: right;
   width: 40px;
 }
@@ -85,7 +82,7 @@ table {
   width: 65vw;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 10vh;
+  padding-top: 3vh;
 }
 
 #h2Wrapper {
@@ -95,4 +92,17 @@ table {
   padding: 8px 1vw;
   float: right;
   margin-bottom: 15px;
+}
+
+#logo {
+  width: 16vw;
+  margin-left: 1.3vw;
+  margin-top: 1.3vw;
+}
+
+#logoText {
+  color: white;
+  margin-top: 0px;
+  font-weight: bold;
+  margin-left: 1.3vw;
 }
