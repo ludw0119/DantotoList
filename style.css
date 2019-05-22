@@ -2,6 +2,14 @@
   box-sizing: border-box;
 } /*"border-box" means that the width and height properties (and min/max properties) include content, padding and border*/
 
+h1 {
+  color: white;
+  font-style: italic;
+  text-align: right;
+  margin: 0px;
+  padding: 0px;
+}
+
 tr:nth-child(even) {
   background-color: #f1b59a;
 }
@@ -10,40 +18,47 @@ tr:nth-child(odd) {
   background-color: #ed9a72;
 }
 
+tr:nth-child(1) {
+  background-color: transparent;
+}
+
+td {
+  width: 20%;
+  color: white;
+  font-size: 1.3em;
+  font-weight: bold;
+  font-style: italic;
+}
+
 td,
 th {
   border: 0px solid #dddddd;
   text-align: center;
   padding: 8px;
+  color: white;
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
 /*td {
   width: 13vw;
 }*/
 
-/*td {
-  width: 20%;
-}*/
+td:nth-child(1) {
+  padding-left: 8px;
+  padding-right: 0px;
+  text-align: right;
+  width: 40px;
+}
 
-td:nth-child(1),
-th:nth-child(1) {
-  padding-left: 40px;
-  padding-right: 15px;
+td:nth-child(2) {
+  width: 10%;
+  text-align: left;
 }
 
 td:nth-child(5),
 th:nth-child(5) {
   padding-right: 0px;
-}
-
-td:nth-child(2),
-th:nth-child(2) {
-  text-align: left;
-  padding-left: 0px;
-}
-
-td:nth-child(1) {
-  width: 40px;
 }
 
 main {
@@ -56,5 +71,28 @@ main {
 table {
   margin-left: auto;
   margin-right: auto;
-  width: 70vw;
+  width: 65vw;
+}
+
+.innerContainer {
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-rows: 1;
+  grid-template-areas: "area1 area2";
+}
+
+#tableWrapper {
+  width: 65vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10vh;
+}
+
+#h2Wrapper {
+  width: 20vw;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  padding: 8px 1vw;
+  float: right;
+  margin-bottom: 15px;
 }
