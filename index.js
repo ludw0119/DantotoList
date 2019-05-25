@@ -1,3 +1,6 @@
+let modal = document.querySelector(".modal");
+let modalClose = document.querySelector(".modalClose");
+
 /*---------------------------------------------------------------displaying-----------------------------------------------------------------*/
 function get() {
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users", {
@@ -31,23 +34,17 @@ function showInput(user) {
     deleteTask(user._id); //wywołanie funkcji "detete task"
     //console.log(task._id);
   });
+  let rows = clone.querySelectorAll(".row");
+  rows.forEach(row => {
+    row.addEventListener("click", e => {
+      showModal(user._id);
+    });
+  });
 
   document.querySelector("table").appendChild(clone);
 }
 
 /*---------------------------------------------------------------deleting-----------------------------------------------------------------*/
-
-/*document.querySelector("table").addEventListener("click", clickList);
-
-function clickList(event) {
-  if (event.target.classList.contains("removeButton")) {
-    //event.target.parentElement.remove();
-    let removeButtonId = event.target.id;
-    let toBeRemoved = removeButtonId.substring(12);
-    //console.log(toBeRemoved);
-    deleteTask(toBeRemoved);
-  }
-}*/
 
 function deleteTask(id) {
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users/" + id, {
@@ -67,3 +64,35 @@ function deleteTask(id) {
 // Figures out if a remove button was clicked
 // If so, calls clickRemove
 get();
+
+function showModal(id) {
+  console.log(id);
+
+  fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users/" + id, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": "5ce6c77b780a473c8df5cb6d",
+      "cache-control": "no-cache"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      //console.log(data);
+      modal.style.display = "block";
+      let fullname = document.querySelector("#Fullname");
+      let email = document.querySelector("#Email");
+      let telephone = document.querySelector("#Telephone");
+      let address = document.querySelector("#Address");
+
+      fullname.textContent = "Full name: " + data.Fullname;
+      email.textContent = data.Email;
+      telephone.textContent = data.Telephone;
+      address.textContent = data.Address;
+
+      modalClose.onclick = function() {
+        modal.style.display = "none";
+        let modalContent = document.querySelector(".modalContent");
+      };
+    });
+}

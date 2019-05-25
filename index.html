@@ -32,11 +32,13 @@
 
       <template>
         <tr class="row">
-          <td><img id="photo" alt="img" height="50" width="50" /></td>
-          <td id="name"></td>
-          <td id="wins"></td>
-          <td id="looses"></td>
-          <td id="rating"></td>
+          <td class="row">
+            <img id="photo" alt="img" height="50" width="50" />
+          </td>
+          <td class="row" id="name"></td>
+          <td class="row" id="wins"></td>
+          <td class="row" id="looses"></td>
+          <td class="row" id="rating"></td>
 
           <td>
             <img
@@ -50,6 +52,27 @@
         </tr>
       </template>
     </main>
+    <!-- The Modal from https://www.w3schools.com/howto/howto_css_modals.asp -->
+    <div id="modalWrapper" class="modal">
+      <!-- Modal content -->
+      <div class="modalContent">
+        <span class="modalClose">&times;</span>
+
+        <div></div>
+        <h4 class="modal">
+          <span id="Fullname"></span>
+        </h4>
+        <h4>
+          <span id="Email"></span>
+        </h4>
+        <h4>
+          <span id="Telephone"></span>
+        </h4>
+        <h4>
+          <span id="Address"></span>
+        </h4>
+      </div>
+    </div>
     <footer></footer>
 
     <script src="index.js"></script>
