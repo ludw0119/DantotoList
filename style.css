@@ -15,11 +15,23 @@ tr:nth-child(even) {
   background-color: #f1b59a;
 }
 
+tr:nth-child(even):hover {
+  background-color: #ee824d;
+}
+
 tr:nth-child(odd) {
   background-color: #ed9a72;
 }
 
+tr:nth-child(odd):hover {
+  background-color: #f27f47;
+}
+
 tr:nth-child(1) {
+  background-color: transparent;
+}
+
+tr:nth-child(1):hover {
   background-color: transparent;
 }
 
@@ -74,6 +86,7 @@ table {
   margin-left: auto;
   margin-right: auto;
   width: 65vw;
+  cursor: pointer;
 }
 
 .innerContainer {
@@ -130,19 +143,68 @@ table {
 /* Modal Content/Box */
 .modalContent {
   margin: 12% auto; /* 15% from the top and centered */
-  width: 40vw; /* Could be more or less, depending on screen size */
-  height: 30vh;
-  padding: 1vw;
+  width: 43vw; /* Could be more or less, depending on screen size */
+  height: 50vh;
+  padding: 0 1vw 3vw 0vw;
   background-color: #b0a39e;
   color: white;
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 0.5fr;
+  grid-template-rows: auto auto auto;
+  border-radius: 5px;
+  grid-template-areas:
+    "area0 area0 area0"
+    "area1 area2 area3"
+    "area4 area5 area6";
+}
+
+.photoTable {
+  width: 60px;
+  height: auto;
+  clip-path: circle(30px);
+}
+
+.photoModal {
+  width: 130px;
+  height: auto;
+  clip-path: circle(64px);
+}
+
+#userPhotoDiv {
+  height: auto;
+  grid-area: area1;
+  text-align: center;
+}
+
+#detailedInfo {
+  grid-area: area2;
+}
+
+#closeDiv {
+  grid-area: area0;
+}
+
+#deactivate {
+  grid-area: area6;
+  float: right;
+  background-color: #dd642b;
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 170px;
+  font-size: 1em;
+  line-height: 1em;
+  margin-right: 4vw;
 }
 
 /* The Close Button */
 .modalClose {
   color: #dd642b;
   float: right;
-  font-size: 58px;
-  font-weight: bold;
+  font-size: 78px;
+  font-weight: lighter;
+  line-height: 78px;
 }
 
 .modalClose:hover,
@@ -154,4 +216,33 @@ table {
 
 #modalWrapper {
   border-radius: 20px;
+}
+
+.modalText1 {
+  font-style: italic;
+  font-weight: lighter;
+  font-size: 1em;
+  line-height: 1em;
+  color: #e4dada;
+}
+
+.modalText2 {
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 1em;
+}
+
+.modalText {
+  margin-top: 0px;
+  padding-top: 0px;
+  margin-bottom: 1.5em;
+}
+
+.removeButton {
+  height: 30px;
+  width: 30px;
+}
+.removeButton:hover {
+  height: 40px;
+  width: auto;
 }

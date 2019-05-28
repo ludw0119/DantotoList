@@ -21,7 +21,7 @@ function get() {
 function showInput(user) {
   const template = document.querySelector("template").content;
   const clone = template.cloneNode(true);
-  clone.querySelector("#photo").src =
+  clone.querySelector(".photoTable").src =
     "https://dantoto-eb44.restdb.io/media/" + user.Photo;
   clone.querySelector("#name").textContent = user.Username;
   clone.querySelector("#wins").textContent = user.Wins;
@@ -80,12 +80,16 @@ function showModal(id) {
     .then(data => {
       //console.log(data);
       modal.style.display = "block";
+      let photo = document.querySelector(".photoModal");
+      let username = document.querySelector("#Username");
       let fullname = document.querySelector("#Fullname");
       let email = document.querySelector("#Email");
       let telephone = document.querySelector("#Telephone");
       let address = document.querySelector("#Address");
 
-      fullname.textContent = "Full name: " + data.Fullname;
+      photo.src = "https://dantoto-eb44.restdb.io/media/" + data.Photo;
+      username.textContent = data.Username;
+      fullname.textContent = data.Fullname;
       email.textContent = data.Email;
       telephone.textContent = data.Telephone;
       address.textContent = data.Address;

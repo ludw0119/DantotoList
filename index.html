@@ -33,7 +33,7 @@
       <template>
         <tr class="row">
           <td class="row">
-            <img id="photo" alt="img" height="50" width="50" />
+            <img class="photoTable" alt="img" />
           </td>
           <td class="row" id="name"></td>
           <td class="row" id="wins"></td>
@@ -41,13 +41,7 @@
           <td class="row" id="rating"></td>
 
           <td>
-            <img
-              src="images/remove.png"
-              class="removeButton"
-              alt="remove"
-              height="30"
-              width="30"
-            />
+            <img src="images/remove.png" class="removeButton" alt="remove" />
           </td>
         </tr>
       </template>
@@ -56,23 +50,39 @@
     <div id="modalWrapper" class="modal">
       <!-- Modal content -->
       <div class="modalContent">
-        <span class="modalClose">&times;</span>
+        <div id="closeDiv">
+          <span class="modalClose">&times;</span>
+        </div>
+        <div id="userPhotoDiv">
+          <img class="photoModal" alt="img" />
+          <h3>
+            <span class="modalText1">User name: </span><br />
+            <span class="modalText2" id="Username"></span>
+          </h3>
+        </div>
 
-        <div></div>
-        <h4 class="modal">
-          <span id="Fullname"></span>
-        </h4>
-        <h4>
-          <span id="Email"></span>
-        </h4>
-        <h4>
-          <span id="Telephone"></span>
-        </h4>
-        <h4>
-          <span id="Address"></span>
-        </h4>
+        <div id="detailedInfo">
+          <h3 class="modalText">
+            <span class="modalText1">Full name:&nbsp;</span>
+            <span class="modalText2" id="Fullname"></span>
+          </h3>
+          <h3 class="modalText">
+            <span class="modalText1">E-mail:&nbsp;</span>
+            <span class="modalText2" id="Email"></span>
+          </h3>
+          <h3 class="modalText">
+            <span class="modalText1">Telephone:&nbsp;</span>
+            <span class="modalText2" id="Telephone"></span>
+          </h3>
+          <h3 class="modalText">
+            <span class="modalText1">Address:&nbsp;</span>
+            <span class="modalText2" id="Address"></span>
+          </h3>
+        </div>
+        <button id="deactivate">Deactivate</button>
       </div>
     </div>
+    >
     <footer></footer>
 
     <script src="index.js"></script>
