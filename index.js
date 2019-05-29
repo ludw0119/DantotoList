@@ -66,7 +66,23 @@ function deleteTask(id) {
 get();
 
 function showModal(id) {
-  console.log(id);
+  //console.log(id);
+  //console.log(event.target.nodeName);
+  let clickedRowId = event.target.id;
+  console.log(clickedRowId);
+  let deactivateBtn = document.querySelector("#deactivate");
+  let rowToDelete = "#" + clickedRowId;
+  let rowToDelete2 = document.querySelector(rowToDelete);
+  //let cellToDelete = rowToDelete2.previousElementSibling;
+  //let cellToDelete2 = document.querySelector(cellToDelete);
+  console.log("row to delete:" + rowToDelete);
+  //console.log("sybling: " + cellToDelete2);
+
+  deactivateBtn.onclick = function fDeactivate() {
+    //alert("deactivate user " + id);
+    rowToDelete2.style.display = "none";
+    //cellToDelete2.style.display = "none";
+  };
 
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users/" + id, {
     method: "get",
