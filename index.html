@@ -8,7 +8,7 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <title>Dantoto list</title>
+    <title>Dantoto users list</title>
   </head>
 
   <body>
@@ -18,7 +18,7 @@
       <img src="images/dantoto.png" alt="logo" id="logo" />
       <p id="logoText">Udbydes af Danske Licens Spil A/S</p>
       <div id="tableWrapper">
-        <div id="h2Wrapper"><h1>USERS</h1></div>
+        <div id="tableTitleDiv"><h1>USERS</h1></div>
         <table cellspacing="0" cellpadding="0">
           <tr>
             <th colspan="2">USERNAME</th>
@@ -32,15 +32,15 @@
 
       <template>
         <tr>
-          <td class="row">
+          <td class="row" id="photoCell">
             <img class="photoTable" alt="img" />
           </td>
-          <td class="row" id="name"></td>
-          <td class="row" id="wins"></td>
-          <td class="row" id="looses"></td>
-          <td class="row" id="rating"></td>
+          <td class="row name"></td>
+          <td class="row wins"></td>
+          <td class="row looses"></td>
+          <td class="row rating"></td>
 
-          <td class="deleteOption">
+          <td class="deleteCell">
             <img src="images/remove.png" class="removeButton" alt="remove" />
           </td>
         </tr>
@@ -62,19 +62,19 @@
         </div>
 
         <div id="detailedInfo">
-          <h3 class="modalText">
+          <h3>
             <span class="modalText1">Full name:&nbsp;</span>
             <span class="modalText2" id="Fullname"></span>
           </h3>
-          <h3 class="modalText">
+          <h3>
             <span class="modalText1">E-mail:&nbsp;</span>
             <span class="modalText2" id="Email"></span>
           </h3>
-          <h3 class="modalText">
+          <h3>
             <span class="modalText1">Telephone:&nbsp;</span>
             <span class="modalText2" id="Telephone"></span>
           </h3>
-          <h3 class="modalText">
+          <h3>
             <span class="modalText1">Address:&nbsp;</span>
             <span class="modalText2" id="Address"></span>
           </h3>

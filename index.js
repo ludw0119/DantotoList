@@ -23,10 +23,10 @@ function showInput(user) {
   const clone = template.cloneNode(true);
   clone.querySelector(".photoTable").src =
     "https://dantoto-eb44.restdb.io/media/" + user.Photo;
-  clone.querySelector("#name").textContent = user.Username;
-  clone.querySelector("#wins").textContent = user.Wins;
-  clone.querySelector("#looses").textContent = user.Looses;
-  clone.querySelector("#rating").textContent = user.Rating;
+  clone.querySelector(".name").textContent = user.Username;
+  clone.querySelector(".wins").textContent = user.Wins;
+  clone.querySelector(".looses").textContent = user.Looses;
+  clone.querySelector(".rating").textContent = user.Rating;
   clone.querySelector(".removeButton").id = "removeButton" + user._id;
 
   clone.querySelector(".removeButton").addEventListener("click", e => {
@@ -65,8 +65,9 @@ function deleteTask(id) {
 // If so, calls clickRemove
 get();
 
+/*---------------------------------------------------------------modal-----------------------------------------------------------------*/
 function showModal(id) {
-  console.log(id);
+  //console.log(id);
 
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users/" + id, {
     method: "get",

@@ -3,12 +3,75 @@
   font-family: "Open Sans", sans-serif;
 } /*"border-box" means that the width and height properties (and min/max properties) include content, padding and border*/
 
+main {
+  background-image: url(images/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 5vh;
+  min-height: 100vh;
+}
+
+/*----------------------Dantoto logo----------------*/
+#logo {
+  width: 16vw;
+  margin-left: 1.3vw;
+  margin-top: 1.3vw;
+}
+
+#logoText {
+  color: white;
+  margin-top: 0px;
+  font-weight: bold;
+  margin-left: 1.3vw;
+}
+
+/*----------------------table style-----------------*/
+
+#tableWrapper {
+  width: 65vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 3vh;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 65vw;
+}
+
+/*table title decoration*/
+#tableTitleDiv {
+  width: 20vw;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  padding: 8px 1vw;
+  float: right;
+  margin-bottom: 15px;
+}
+
+/*table title text*/
 h1 {
   color: white;
   font-style: italic;
   text-align: right;
   margin: 0px;
   padding: 0px;
+}
+
+/*table header text*/
+th {
+  color: white;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+/*table rows text*/
+td {
+  color: white;
+  font-style: italic;
+  font-size: 1.3em;
+  text-align: center;
 }
 
 tr:nth-child(even) {
@@ -37,26 +100,13 @@ tr:nth-child(1):hover {
 
 td {
   width: 20%;
-  color: white;
-  font-style: italic;
-  font-size: 1.3em;
-}
-
-th {
-  font-size: 1.2em;
 }
 
 td,
 th {
   border: 0px solid #dddddd;
-  text-align: center;
   padding: 8px;
-  color: white;
 }
-
-/*td {
-  width: 13vw;
-}*/
 
 td:nth-child(1) {
   padding: 8px;
@@ -74,75 +124,52 @@ th:nth-child(5) {
   padding-right: 0px;
 }
 
-main {
-  background-image: url(images/background.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding-bottom: 5vh;
-  min-height: 100vh;
+.photoTable {
+  width: 60px;
+  height: auto;
+  clip-path: circle(30px);
 }
 
-table {
-  margin-left: auto;
-  margin-right: auto;
-  width: 65vw;
+.row {
+  cursor: pointer;
 }
 
-.innerContainer {
-  display: grid;
-  grid-template-columns: 2;
-  grid-template-rows: 1;
-  grid-template-areas: "area1 area2";
+.removeButton {
+  height: 30px;
+  width: 30px;
+  cursor: url(images/cursor.png), auto;
 }
 
-#tableWrapper {
-  width: 65vw;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 3vh;
+.removeButton:hover {
+  height: 50px;
+  width: auto;
 }
 
-#h2Wrapper {
-  width: 20vw;
-  border-bottom: 1px solid white;
-  border-right: 1px solid white;
-  padding: 8px 1vw;
-  float: right;
-  margin-bottom: 15px;
+.deleteCell {
+  cursor: auto;
 }
 
-#logo {
-  width: 16vw;
-  margin-left: 1.3vw;
-  margin-top: 1.3vw;
-}
-
-#logoText {
-  color: white;
-  margin-top: 0px;
-  font-weight: bold;
-  margin-left: 1.3vw;
-}
+/*----------------------modal-----------------*/
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 20px;
 }
 
 /* Modal Content/Box */
 .modalContent {
-  margin: 12% auto; /* 15% from the top and centered */
-  width: 43vw; /* Could be more or less, depending on screen size */
+  margin: 12% auto;
+  width: 43vw;
   height: 50vh;
   padding: 0 1vw 3vw 0vw;
   background-color: #b0a39e;
@@ -155,12 +182,6 @@ table {
     "area0 area0 area0"
     "area1 area2 area3"
     "area4 area5 area6";
-}
-
-.photoTable {
-  width: 60px;
-  height: auto;
-  clip-path: circle(30px);
 }
 
 .photoModal {
@@ -217,6 +238,9 @@ table {
 }
 
 .modalText1 {
+  margin-top: 0px;
+  padding-top: 0px;
+  margin-bottom: 1.5em;
   font-style: italic;
   font-weight: lighter;
   font-size: 1em;
@@ -225,32 +249,10 @@ table {
 }
 
 .modalText2 {
-  font-weight: normal;
-  font-size: 1em;
-  line-height: 1em;
-}
-
-.modalText {
   margin-top: 0px;
   padding-top: 0px;
   margin-bottom: 1.5em;
-}
-
-.removeButton {
-  height: 30px;
-  width: 30px;
-  cursor: url(images/cursor.png), auto;
-}
-
-.removeButton:hover {
-  height: 50px;
-  width: auto;
-}
-
-.row {
-  cursor: pointer;
-}
-
-.deleteOption {
-  cursor: auto;
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 1em;
 }
