@@ -215,7 +215,6 @@ th:nth-child(5) {
 }
 
 #deactivateButton {
-  display: inline-block;
   float: right;
   background-color: #dd642b;
   color: white;
@@ -225,7 +224,7 @@ th:nth-child(5) {
   width: 200px;
   font-size: 1.2em;
   line-height: 1.2em;
-  margin: 0 55px 0 0;
+  margin: 0 50px 0 0;
 }
 
 .modalClose {

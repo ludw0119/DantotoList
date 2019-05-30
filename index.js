@@ -5,19 +5,20 @@ let arrayOfUsers = [];
 
 //prototype object
 const userObject = {
-  photo: "-user photo-",
-  username: "-user name-",
-  password: "-user password-",
-  wins: "-wins-",
-  looses: "-looses-",
-  rating: "-rating-",
-  fullname: "-fullname-",
-  email: "-email-",
-  telephone: "-telephone-",
-  address: "-address-"
+  Photo: "-user photo-",
+  Username: "-user name-",
+  Password: "-user password-",
+  Wins: "-wins-",
+  Looses: "-looses-",
+  Rating: "-rating-",
+  Fullname: "-fullname-",
+  Email: "-email-",
+  Telephone: "-telephone-",
+  Address: "-address-",
+  Id: "-id-"
 };
 
-/*-----------making object----------*/
+/*------------------------------------------------------------------------making object---------------------------------------------------------------------*/
 function getJSON() {
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users", {
     method: "get",
@@ -36,7 +37,6 @@ function makeObject(usersList) {
   //alert("make obj");
   usersList.forEach(user => {
     const newUserObject = Object.create(userObject);
-    //console.log(userObject); //ten console log działa tak samo jak u Juliany, czyli pokazuje pusty object bez danych z bazy/json, ale z templatem dla każdego usera/studenta
     newUserObject.photo = "https://dantoto-eb44.restdb.io/media/" + user.Photo;
     newUserObject.username = user.Username;
     newUserObject.password = user.Password;
@@ -47,43 +47,47 @@ function makeObject(usersList) {
     newUserObject.email = user.Email;
     newUserObject.telephone = user.Telephone;
     newUserObject.address = user.Address;
+    newUserObject.id = user._id;
     arrayOfUsers.push(newUserObject);
-    //console.log(arrayOfUsers);
+    //console.log(user.Username);
+    //console.log(newUserObject.username);
   });
   displayUsers(arrayOfUsers);
 }
 
+/*---------------------------------------------------------------displaying table content - with object-----------------------------------------------------------------*/
+
 function displayUsers(arrayOfUsers) {
-  //console.log(arrayOfUsers);
+  document.querySelectorAll(".tableRow").forEach(item => {
+    item.remove(); //the rows need to deleted before displaying users, because otherwise they are duplicated if the function is called 2 or more times in the code
+  });
   arrayOfUsers.forEach(user => {
     const template = document.querySelector("template").content;
     const clone = template.cloneNode(true);
+    //console.log(clone);
 
-    clone.querySelector(".photoTable").src =
-      "https://dantoto-eb44.restdb.io/media/" + user.Photo;
-    clone.querySelector(".name").textContent = user.Username;
-    clone.querySelector(".wins").textContent = user.Wins;
-    clone.querySelector(".looses").textContent = user.Looses;
-    clone.querySelector(".rating").textContent = user.Rating;
-    clone.querySelector(".removeButton").id = "removeButton" + user._id;
-
+    clone.querySelector(".photoTable").src = user.photo;
+    clone.querySelector(".name").textContent = user.username;
+    clone.querySelector(".wins").textContent = user.wins;
+    clone.querySelector(".looses").textContent = user.looses;
+    clone.querySelector(".rating").textContent = user.rating;
+    clone.querySelector(".removeButton").id = "removeButton" + user.id;
     clone.querySelector(".removeButton").addEventListener("click", e => {
-      e.target.parentElement.parentElement.remove();
-      deleteTask(user._id); //wywołanie funkcji "detete task"
+      deleteTask(user.id); //wywołanie funkcji "detete task"
       //console.log(task._id);
     });
-
+    //console.log(user.id);
     let rows = clone.querySelectorAll(".row");
     rows.forEach(row => {
       row.addEventListener("click", e => {
-        showModal(user._id);
+        showModal(user.id);
       });
     });
     document.querySelector("table").appendChild(clone);
   });
 }
 
-/*---------------------------------------------------------------displaying table content-----------------------------------------------------------------*/
+/*---------------------------------------------------------------displaying table content - without object-----------------------------------------------------------------*/
 /*function get() {
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users", {
     method: "get",
@@ -141,13 +145,20 @@ function deleteTask(id) {
     .then(data => {
       console.log(data);
     });
+  //usunięcie z userslist - obiektu
+  let obj = arrayOfUsers.splice(findById(id), 1);
+  console.log(obj);
+  //odświeżenie tabeli
+  displayUsers(arrayOfUsers);
 }
 
-//get();
+function findById(id) {
+  return arrayOfUsers.findIndex(obj => obj.id === id); //the function finds ID of a user in the object (ID in function "deleteTask" argument is an ID number from the database (different than in object)
+}
 
-/*-----------------------------------------------------------------modal-----------------------------------------------------------------*/
+/*---------------------------------------------------------------------modal---------------------------------------------------------------------------*/
 function showModal(id) {
-  //console.log(id);
+  console.log(id);
 
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users/" + id, {
     method: "get",
@@ -167,6 +178,7 @@ function showModal(id) {
       let email = document.querySelector("#Email");
       let telephone = document.querySelector("#Telephone");
       let address = document.querySelector("#Address");
+      let button = document.querySelector("#deactivateButton");
 
       photo.src = "https://dantoto-eb44.restdb.io/media/" + data.Photo;
       username.textContent = data.Username;
@@ -176,8 +188,23 @@ function showModal(id) {
       address.textContent = data.Address;
 
       modalClose.onclick = function() {
-        modal.style.display = "none";
-        let modalContent = document.querySelector(".modalContent");
+        hideModal();
+      };
+      button.onclick = function() {
+        deactivateUser(id);
       };
     });
+}
+
+function hideModal() {
+  modal.style.display = "none";
+  let modalContent = document.querySelector(".modalContent");
+}
+
+function deactivateUser(id) {
+  let rowNo = findById(id);
+  deactivatedList.push(arrayOfUsers[rowNo]);
+  let obj = arrayOfUsers.splice(rowNo, 1); //the variable has a value of a number so it can be used as index in splice
+  displayUsers(arrayOfUsers);
+  hideModal();
 }
