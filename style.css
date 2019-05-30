@@ -161,8 +161,7 @@ th:nth-child(5) {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.65);
   border-radius: 20px;
 }
 
@@ -171,8 +170,14 @@ th:nth-child(5) {
   margin: 12% auto;
   width: 43vw;
   height: 50vh;
-  padding: 0 1vw 3vw 0vw;
-  background-color: #b0a39e;
+  /*padding: 0 0 3vw 0;*/
+  background-color: #605757;
+  background-color: rgba(
+    96,
+    87,
+    87,
+    0.9
+  ); /*It is the same color as #605757, but in rgba*/
   color: white;
   display: grid;
   grid-template-columns: 1.5fr 2fr 0.5fr;
@@ -181,7 +186,7 @@ th:nth-child(5) {
   grid-template-areas:
     "area0 area0 area0"
     "area1 area2 area3"
-    "area4 area5 area6";
+    "area4 area6 area6";
 }
 
 .photoModal {
@@ -194,6 +199,7 @@ th:nth-child(5) {
   height: auto;
   grid-area: area1;
   text-align: center;
+  font-size: 1.1em;
 }
 
 #detailedInfo {
@@ -204,27 +210,27 @@ th:nth-child(5) {
   grid-area: area0;
 }
 
-#deactivate {
+#deactivateDiv {
   grid-area: area6;
+}
+
+#deactivateButton {
   float: right;
   background-color: #dd642b;
   color: white;
   border-style: none;
   border-radius: 5px;
   height: 40px;
-  width: 170px;
-  font-size: 1em;
-  line-height: 1em;
-  margin-right: 4vw;
+  width: 200px;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  margin: 0 50px 0 0;
 }
 
-/* The Close Button */
 .modalClose {
-  color: #dd642b;
   float: right;
-  font-size: 78px;
-  font-weight: lighter;
-  line-height: 78px;
+  width: 70px;
+  height: auto;
 }
 
 .modalClose:hover {
