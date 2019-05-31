@@ -55,7 +55,7 @@ function makeObject(usersList) {
   displayUsers(arrayOfUsers);
 }
 
-/*---------------------------------------------------------------displaying table content - with object-----------------------------------------------------------------*/
+/*---------------------------------------------------------------displaying table 1 content - with object-----------------------------------------------------------------*/
 
 function displayUsers(arrayOfUsers) {
   document.querySelectorAll(".tableRow").forEach(item => {
@@ -83,7 +83,40 @@ function displayUsers(arrayOfUsers) {
         showModal(user.id);
       });
     });
-    document.querySelector("table").appendChild(clone);
+    document.querySelector("#table1").appendChild(clone);
+  });
+}
+
+/*---------------------------------------------------------------displaying table 2 content - with object-----------------------------------------------------------------*/
+
+function displayDeactivated(deactivatedList) {
+  /*document.querySelectorAll(".tableRow").forEach(item => {
+    item.remove(); //the rows need to deleted before displaying users, because otherwise they are duplicated if the function is called 2 or more times in the code
+  });*/
+  deactivatedList.forEach(user => {
+    const template = document.querySelector("template").content;
+    const clone = template.cloneNode(true);
+    //console.log(clone);
+
+    clone.querySelector(".photoTable").src = user.photo;
+    clone.querySelector(".name").textContent = user.username;
+    clone.querySelector(".wins").textContent = user.wins;
+    clone.querySelector(".looses").textContent = user.looses;
+    clone.querySelector(".rating").textContent = user.rating;
+    clone.querySelector(".removeButton").id = "removeButton" + user.id;
+    clone.querySelector(".removeButton").addEventListener("click", e => {
+      deleteTask(user.id); //wywołanie funkcji "detete task"
+      //console.log(task._id);
+    });
+    //console.log(user.id);
+    let rows = clone.querySelectorAll(".row");
+    rows.forEach(row => {
+      row.addEventListener("click", e => {
+        showModal(user.id);
+      });
+    });
+    document.querySelector("#table2").appendChild(clone);
+    document.querySelector("#table2Wrapper").classList.remove("invisible");
   });
 }
 
@@ -207,4 +240,5 @@ function deactivateUser(id) {
   let obj = arrayOfUsers.splice(rowNo, 1); //the variable has a value of a number so it can be used as index in splice
   displayUsers(arrayOfUsers);
   hideModal();
+  displayDeactivated(deactivatedList);
 }

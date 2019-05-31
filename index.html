@@ -17,9 +17,23 @@
     <main>
       <img src="images/dantoto.png" alt="logo" id="logo" />
       <p id="logoText">Udbydes af Danske Licens Spil A/S</p>
+
       <div id="tableWrapper">
         <div id="tableTitleDiv"><h1>USERS</h1></div>
-        <table cellspacing="0" cellpadding="0">
+        <table id="table1" cellspacing="0" cellpadding="0">
+          <tr>
+            <th colspan="2">USERNAME</th>
+            <th>WINS</th>
+            <th>LOSSES</th>
+            <th>RATING</th>
+            <th>REMOVE</th>
+          </tr>
+        </table>
+      </div>
+
+      <div id="table2Wrapper" class="invisible">
+        <div id="table2TitleDiv"><h1>DEACTIVATED USERS</h1></div>
+        <table id="table2" cellspacing="0" cellpadding="0">
           <tr>
             <th colspan="2">USERNAME</th>
             <th>WINS</th>

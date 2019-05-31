@@ -25,7 +25,7 @@ main {
   margin-left: 1.3vw;
 }
 
-/*----------------------table style-----------------*/
+/*----------------------table 1 style-----------------*/
 
 #tableWrapper {
   width: 65vw;
@@ -147,6 +147,52 @@ th:nth-child(5) {
 
 .deleteCell {
   cursor: auto;
+}
+
+/*----------------------table 2 style-----------------*/
+
+#table2Wrapper {
+  width: 65vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 3vh;
+}
+
+.invisible {
+  display: none;
+}
+
+#table2TitleDiv {
+  width: 25vw;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  padding: 8px 1vw;
+  float: right;
+  margin-bottom: 15px;
+}
+
+#table2Wrapper tr:nth-child(even) {
+  background-color: #73371c;
+}
+
+#table2Wrapper tr:nth-child(even):hover {
+  background-color: #371c11;
+}
+
+#table2Wrapper tr:nth-child(odd) {
+  background-color: #4e2817;
+}
+
+#table2Wrapper tr:nth-child(odd):hover {
+  background-color: #371c11;
+}
+
+#table2Wrapper tr:nth-child(1) {
+  background-color: transparent;
+}
+
+#table2Wrapper tr:nth-child(1):hover {
+  background-color: transparent;
 }
 
 /*----------------------modal-----------------*/
