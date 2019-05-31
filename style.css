@@ -3,6 +3,9 @@
   font-family: "Open Sans", sans-serif;
 } /*"border-box" means that the width and height properties (and min/max properties) include content, padding and border*/
 
+body {
+  margin: 0px;
+}
 main {
   background-image: url(images/background.png);
   background-repeat: no-repeat;
@@ -37,7 +40,7 @@ main {
 table {
   margin-left: auto;
   margin-right: auto;
-  width: 65vw;
+  width: 100%;
 }
 
 /*table title decoration*/
@@ -307,4 +310,71 @@ th:nth-child(5) {
   font-weight: normal;
   font-size: 1em;
   line-height: 1em;
+}
+
+/*---------------------------mobile version--------------------------------------*/
+@media all and (max-width: 700px) {
+  #tableWrapper {
+    width: 80vw;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  /*table header text*/
+  th {
+    color: white;
+    font-size: 0.8em;
+    text-align: center;
+  }
+
+  /*table rows text*/
+  td {
+    color: white;
+    font-style: italic;
+    font-size: 0.8em;
+    text-align: center;
+  }
+  td,
+  th {
+    border: 0px solid #dddddd;
+    padding: 1px;
+  }
+
+  .photoTable {
+    width: 46px;
+    height: auto;
+    clip-path: circle(23px);
+  }
+
+  #tableTitleDiv {
+    width: 30vw;
+  }
+
+  #table2TitleDiv {
+    width: 40vw;
+  }
+
+  h1 {
+    font-size: 1.3em;
+  }
+
+  /* Modal Content/Box */
+  .modalContent {
+    margin: 12% auto;
+    width: 90vw;
+    height: 80vh;
+    padding-bottom: 20px;
+  }
+
+  #table2Wrapper {
+    width: 80vw;
+  }
+
+  .photoModal {
+    width: 100px;
+    height: auto;
+    clip-path: circle(50px);
+  }
 }
