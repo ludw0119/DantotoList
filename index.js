@@ -19,6 +19,7 @@ const userObject = {
 };
 
 /*------------------------------------------------------------------------making object---------------------------------------------------------------------*/
+
 function getJSON() {
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users", {
     method: "get",
@@ -66,16 +67,24 @@ function displayUsers(arrayOfUsers) {
     const clone = template.cloneNode(true);
     //console.log(clone);
 
-    clone.querySelector(".photoTable").src = user.photo;
+    if (user.photo === "https://dantoto-eb44.restdb.io/media/") {
+      clone.querySelector(".photoTable").src = "images/noPhoto.png";
+    } else {
+      clone.querySelector(".photoTable").src = user.photo;
+    }
+
     clone.querySelector(".name").textContent = user.username;
     clone.querySelector(".wins").textContent = user.wins;
     clone.querySelector(".looses").textContent = user.looses;
     clone.querySelector(".rating").textContent = user.rating;
-    clone.querySelector(".removeButton").id = "removeButton" + user.id;
-    clone.querySelector(".removeButton").addEventListener("click", e => {
-      deleteTask(user.id); //wywołanie funkcji "detete task"
-      //console.log(task._id);
+    let removeButtonId = "removeButton" + user.id;
+    clone.querySelector(".removeButton").id = removeButtonId;
+    let removeButtonObject = clone.querySelector(".removeButton");
+    removeButtonObject.addEventListener("click", e => {
+      showWarning(user.id);
     });
+    clone.querySelector(".warningWrapper").id = "warningWrapper" + user.id;
+
     //console.log(user.id);
     let rows = clone.querySelectorAll(".row");
     rows.forEach(row => {
@@ -83,8 +92,46 @@ function displayUsers(arrayOfUsers) {
         showModal(user.id);
       });
     });
+
+    /*let deleteBins = clone.querySelectorAll(".removeButton");
+    deleteBins.forEach(bin => {
+      console.log(user.id);
+      bin.addEventListener("click", showWarning(user.id));
+    });*/
+
+    let warningCloses = clone.querySelectorAll(".warningClose");
+    warningCloses.forEach(warningClose => {
+      warningClose.addEventListener("click", e => {
+        hideWarning(user.id);
+      });
+    });
+
+    /*clone.querySelector(".removeButton").addEventListener("click", e => {
+      e.target.parentElement.parentElement.remove();
+      deleteTask(user._id); //wywołanie funkcji "detete task"
+      //console.log(task._id);
+    });*/
+
+    let deleteButtons = clone.querySelectorAll(".deleteButton");
+    deleteButtons.forEach(delButton => {
+      delButton.addEventListener("click", e => {
+        deleteUser(user.id);
+      });
+    });
+
     document.querySelector("#table1").appendChild(clone);
   });
+}
+
+function showWarning(id) {
+  let devID = "#warningWrapper" + id;
+  document.querySelector(devID).style.display = "block";
+  //alert("warning alert");
+}
+
+function hideWarning(id) {
+  let devID = "#warningWrapper" + id;
+  document.querySelector(devID).style.display = "none";
 }
 
 /*---------------------------------------------------------------displaying table 2 content - with object-----------------------------------------------------------------*/
@@ -104,10 +151,10 @@ function displayDeactivated(deactivatedList) {
     clone.querySelector(".looses").textContent = user.looses;
     clone.querySelector(".rating").textContent = user.rating;
     clone.querySelector(".removeButton").id = "removeButton" + user.id;
-    clone.querySelector(".removeButton").addEventListener("click", e => {
-      deleteTask(user.id); //wywołanie funkcji "detete task"
-      //console.log(task._id);
-    });
+    //clone.querySelector(".removeButton").addEventListener("click", e => {
+    //deleteTask(user.id); //wywołanie funkcji "detete task"
+    //console.log(task._id);
+    //});
     //console.log(user.id);
     let rows = clone.querySelectorAll(".row");
     rows.forEach(row => {
@@ -120,7 +167,7 @@ function displayDeactivated(deactivatedList) {
   });
 }
 
-/*---------------------------------------------------------------displaying table content - without object-----------------------------------------------------------------*/
+/*---------------------------------------------------------------displaying table 1 content - without object-----------------------------------------------------------------*/
 /*function get() {
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users", {
     method: "get",
@@ -165,7 +212,8 @@ function displayDeactivated(deactivatedList) {
 
 /*---------------------------------------------------------------deleting from database-----------------------------------------------------------------*/
 
-function deleteTask(id) {
+function deleteUser(id) {
+  //deleting from the database
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users/" + id, {
     method: "delete",
     headers: {
@@ -175,13 +223,12 @@ function deleteTask(id) {
     }
   })
     .then(res => res.json())
-    .then(data => {
-      console.log(data);
-    });
-  //usunięcie z userslist - obiektu
+    .then(data => {});
+  //deleting from the object
   let obj = arrayOfUsers.splice(findById(id), 1);
-  console.log(obj);
-  //odświeżenie tabeli
+  //console.log(obj);
+  //updating the table view
+  hideWarning(id);
   displayUsers(arrayOfUsers);
 }
 
@@ -212,7 +259,7 @@ function showModal(id) {
       let telephone = document.querySelector("#Telephone");
       let address = document.querySelector("#Address");
       let button = document.querySelector("#deactivateButton");
-
+      console.log(data);
       photo.src = "https://dantoto-eb44.restdb.io/media/" + data.Photo;
       username.textContent = data.Username;
       fullname.textContent = data.Fullname;
@@ -230,8 +277,7 @@ function showModal(id) {
 }
 
 function hideModal() {
-  modal.style.display = "none";
-  let modalContent = document.querySelector(".modalContent");
+  modal.classList.add("invisible");
 }
 
 function deactivateUser(id) {
@@ -242,3 +288,6 @@ function deactivateUser(id) {
   hideModal();
   displayDeactivated(deactivatedList);
 }
+
+//let deleteBtn = document.querySelector("#deleteButton");
+//  deleteBtn.addEventListener("click", deleteTask(user.id));
