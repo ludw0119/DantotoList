@@ -15,7 +15,7 @@ main {
 }
 
 /*----------------------Dantoto logo----------------*/
-#logo {
+#logoDantoto {
   width: 16vw;
   margin-left: 1.3vw;
   margin-top: 1.3vw;
@@ -23,7 +23,7 @@ main {
 
 #logoText {
   color: white;
-  margin-top: 0px;
+  margin-top: 0;
   font-weight: bold;
   margin-left: 1.3vw;
 }
@@ -58,8 +58,8 @@ h1 {
   color: white;
   font-style: italic;
   text-align: right;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 
 /*table header text*/
@@ -77,27 +77,23 @@ td {
   text-align: center;
 }
 
-tr:nth-child(even) {
+#table1 tr:nth-child(even) {
   background-color: #f1b59a;
 }
 
-tr:nth-child(even):hover {
-  background-color: #ee824d;
-}
-
-tr:nth-child(odd) {
+#table1 tr:nth-child(odd) {
   background-color: #ed9a72;
 }
 
-tr:nth-child(odd):hover {
+#table1 tr:hover {
   background-color: #f27f47;
 }
 
-tr:nth-child(1) {
+#table1 tr:nth-child(1) {
   background-color: transparent;
 }
 
-tr:nth-child(1):hover {
+#table1 tr:nth-child(1):hover {
   background-color: transparent;
 }
 
@@ -107,7 +103,7 @@ td {
 
 td,
 th {
-  border: 0px solid #dddddd;
+  border-style: none;
   padding: 8px;
 }
 
@@ -124,7 +120,7 @@ td:nth-child(2) {
 
 td:nth-child(5),
 th:nth-child(5) {
-  padding-right: 0px;
+  padding-right: 0;
 }
 
 .photoTable {
@@ -140,7 +136,7 @@ th:nth-child(5) {
 .removeButton {
   height: 30px;
   width: 30px;
-  cursor: url(images/cursor.png), auto;
+  cursor: pointer;
 }
 
 .removeButton:hover {
@@ -178,16 +174,12 @@ th:nth-child(5) {
   background-color: #73371c;
 }
 
-#table2Wrapper tr:nth-child(even):hover {
+#table2Wrapper tr:hover {
   background-color: #371c11;
 }
 
 #table2Wrapper tr:nth-child(odd) {
   background-color: #4e2817;
-}
-
-#table2Wrapper tr:nth-child(odd):hover {
-  background-color: #371c11;
 }
 
 #table2Wrapper tr:nth-child(1) {
@@ -294,8 +286,8 @@ th:nth-child(5) {
 }
 
 .modalText1 {
-  margin-top: 0px;
-  padding-top: 0px;
+  margin-top: 0;
+  padding-top: 0;
   margin-bottom: 1.5em;
   font-style: italic;
   font-weight: lighter;
@@ -305,8 +297,8 @@ th:nth-child(5) {
 }
 
 .modalText2 {
-  margin-top: 0px;
-  padding-top: 0px;
+  margin-top: 0;
+  padding-top: 0;
   margin-bottom: 1.5em;
   font-weight: normal;
   font-size: 1em;
@@ -365,8 +357,16 @@ ifDeleteDiv h4 {
 
 /*---------------------------mobile version--------------------------------------*/
 @media all and (max-width: 700px) {
+  #logoDantoto {
+    width: 28vw;
+  }
+
+  #logoText {
+    margin-top: 0;
+  }
+
   #tableWrapper {
-    width: 80vw;
+    width: 90vw;
   }
 
   table {
@@ -389,7 +389,7 @@ ifDeleteDiv h4 {
   }
   td,
   th {
-    border: 0px solid #dddddd;
+    border-style: none;
     padding: 1px;
   }
 
@@ -409,6 +409,7 @@ ifDeleteDiv h4 {
 
   h1 {
     font-size: 1.3em;
+    margin: 0 2vw 0 0;
   }
 
   /* Modal Content/Box */
@@ -420,7 +421,7 @@ ifDeleteDiv h4 {
   }
 
   #table2Wrapper {
-    width: 80vw;
+    width: 90vw;
   }
 
   .photoModal {

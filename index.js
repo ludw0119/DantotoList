@@ -63,56 +63,51 @@ function displayUsers(arrayOfUsers) {
     item.remove(); //the rows need to deleted before displaying users, because otherwise they are duplicated if the function is called 2 or more times in the code
   });
   arrayOfUsers.forEach(user => {
-    const template = document.querySelector("template").content;
-    const clone = template.cloneNode(true);
+    const template1 = document.querySelector("#template1").content;
+    const template2 = document.querySelector("#template2").content;
+    const clone = template1.cloneNode(true);
+    const clone2 = template2.cloneNode(true);
     //console.log(clone);
+    //console.log(clone2);
 
     if (user.photo === "https://dantoto-eb44.restdb.io/media/") {
       clone.querySelector(".photoTable").src = "images/noPhoto.png";
     } else {
       clone.querySelector(".photoTable").src = user.photo;
     }
-
     clone.querySelector(".name").textContent = user.username;
     clone.querySelector(".wins").textContent = user.wins;
     clone.querySelector(".looses").textContent = user.looses;
     clone.querySelector(".rating").textContent = user.rating;
     let removeButtonId = "removeButton" + user.id;
     clone.querySelector(".removeButton").id = removeButtonId;
-    let removeButtonObject = clone.querySelector(".removeButton");
+    removeButtonObject = clone.querySelector(".removeButton");
     removeButtonObject.addEventListener("click", e => {
       showWarning(user.id);
     });
-    clone.querySelector(".warningWrapper").id = "warningWrapper" + user.id;
+
+    //warning modal cloned
+    clone2.querySelector(".warningWrapper").id = "warningWrapper" + user.id;
 
     //console.log(user.id);
     let rows = clone.querySelectorAll(".row");
     rows.forEach(row => {
       row.addEventListener("click", e => {
         showModal(user.id);
+        document.querySelector("#deactivateButton").style.display = "block";
       });
     });
 
-    /*let deleteBins = clone.querySelectorAll(".removeButton");
-    deleteBins.forEach(bin => {
-      console.log(user.id);
-      bin.addEventListener("click", showWarning(user.id));
-    });*/
-
-    let warningCloses = clone.querySelectorAll(".warningClose");
+    //warning modal closing
+    let warningCloses = clone2.querySelectorAll(".warningClose");
     warningCloses.forEach(warningClose => {
       warningClose.addEventListener("click", e => {
         hideWarning(user.id);
       });
     });
 
-    /*clone.querySelector(".removeButton").addEventListener("click", e => {
-      e.target.parentElement.parentElement.remove();
-      deleteTask(user._id); //wywołanie funkcji "detete task"
-      //console.log(task._id);
-    });*/
-
-    let deleteButtons = clone.querySelectorAll(".deleteButton");
+    //warning modal delete buttons
+    let deleteButtons = clone2.querySelectorAll(".deleteButton");
     deleteButtons.forEach(delButton => {
       delButton.addEventListener("click", e => {
         deleteUser(user.id);
@@ -120,6 +115,7 @@ function displayUsers(arrayOfUsers) {
     });
 
     document.querySelector("#table1").appendChild(clone);
+    document.querySelector("#parent2").appendChild(clone2);
   });
 }
 
@@ -141,30 +137,43 @@ function displayDeactivated(deactivatedList) {
     item.remove(); //the rows need to deleted before displaying users, because otherwise they are duplicated if the function is called 2 or more times in the code
   });*/
   deactivatedList.forEach(user => {
-    const template = document.querySelector("template").content;
+    const template = document.querySelector("#template1").content;
     const clone = template.cloneNode(true);
     //console.log(clone);
 
-    clone.querySelector(".photoTable").src = user.photo;
+    if (user.photo != null) {
+      if (user.photo === "https://dantoto-eb44.restdb.io/media/") {
+        clone.querySelector(".photoTable").src = "images/noPhoto.png";
+      } else {
+        clone.querySelector(".photoTable").src = user.photo;
+      }
+    }
+
     clone.querySelector(".name").textContent = user.username;
     clone.querySelector(".wins").textContent = user.wins;
     clone.querySelector(".looses").textContent = user.looses;
     clone.querySelector(".rating").textContent = user.rating;
-    clone.querySelector(".removeButton").id = "removeButton" + user.id;
-    //clone.querySelector(".removeButton").addEventListener("click", e => {
-    //deleteTask(user.id); //wywołanie funkcji "detete task"
-    //console.log(task._id);
-    //});
-    //console.log(user.id);
+    //clone.querySelector(".removeButton").id = "removeButton" + user.id;
+    let removeButtonId = "removeButton" + user.id;
+    clone.querySelector(".removeButton").id = removeButtonId;
+    removeButtonObject = clone.querySelector(".removeButton");
+    removeButtonObject.addEventListener("click", e => {
+      showWarning(user.id);
+      //console.log(user.username);
+    });
     let rows = clone.querySelectorAll(".row");
     rows.forEach(row => {
       row.addEventListener("click", e => {
         showModal(user.id);
+        document.querySelector("#deactivateButton").style.display = "none";
       });
     });
     document.querySelector("#table2").appendChild(clone);
     document.querySelector("#table2Wrapper").classList.remove("invisible");
   });
+  if (deactivatedList.length == 0) {
+    document.querySelector("#table2Wrapper").classList.add("invisible");
+  }
 }
 
 /*---------------------------------------------------------------displaying table 1 content - without object-----------------------------------------------------------------*/
@@ -214,6 +223,7 @@ function displayDeactivated(deactivatedList) {
 
 function deleteUser(id) {
   //deleting from the database
+
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users/" + id, {
     method: "delete",
     headers: {
@@ -225,20 +235,30 @@ function deleteUser(id) {
     .then(res => res.json())
     .then(data => {});
   //deleting from the object
-  let obj = arrayOfUsers.splice(findById(id), 1);
-  //console.log(obj);
+  let arrayId = findById(id, arrayOfUsers);
+  if (arrayId < 0) {
+    //removing from deactivated
+    arrayId = findById(id, deactivatedList);
+    deactivatedList.splice(arrayId, 1);
+  } else {
+    //removing from users
+    arrayOfUsers.splice(arrayId, 1);
+  }
+
   //updating the table view
   hideWarning(id);
   displayUsers(arrayOfUsers);
+  displayDeactivated(deactivatedList);
 }
 
-function findById(id) {
-  return arrayOfUsers.findIndex(obj => obj.id === id); //the function finds ID of a user in the object (ID in function "deleteTask" argument is an ID number from the database (different than in object)
+function findById(id, arrayToCheck) {
+  //as this function checks both arrays,array to check has to be passed
+  return arrayToCheck.findIndex(obj => obj.id === id); //the function finds ID of a user in the object (ID in function "deleteTask" argument is an ID number from the database (different than in object)
 }
 
 /*---------------------------------------------------------------------modal---------------------------------------------------------------------------*/
 function showModal(id) {
-  console.log(id);
+  //console.log(id);
 
   fetch("https://dantoto-eb44.restdb.io/rest/dantoto-users/" + id, {
     method: "get",
@@ -277,16 +297,17 @@ function showModal(id) {
 }
 
 function hideModal() {
-  modal.classList.add("invisible");
+  modal.style.display = "none";
 }
 
 function deactivateUser(id) {
-  let rowNo = findById(id);
+  let rowNo = findById(id, arrayOfUsers);
   deactivatedList.push(arrayOfUsers[rowNo]);
   let obj = arrayOfUsers.splice(rowNo, 1); //the variable has a value of a number so it can be used as index in splice
   displayUsers(arrayOfUsers);
   hideModal();
   displayDeactivated(deactivatedList);
+  hideModal();
 }
 
 //let deleteBtn = document.querySelector("#deleteButton");
