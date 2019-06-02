@@ -14,13 +14,13 @@
   <body>
     <header></header>
 
-    <main>
-      <img src="images/dantoto.png" alt="logo" id="logo" />
+    <main id="parent2">
+      <img src="images/dantoto.png" alt="logo" id="logoDantoto" />
       <p id="logoText">Udbydes af Danske Licens Spil A/S</p>
 
       <div id="tableWrapper">
         <div id="tableTitleDiv"><h1>USERS</h1></div>
-        <table id="table1" cellspacing="0" cellpadding="0">
+        <table id="table1" cellspacing="0">
           <tr>
             <th colspan="2">USERNAME</th>
             <th>WINS</th>
@@ -33,7 +33,7 @@
 
       <div id="table2Wrapper" class="invisible">
         <div id="table2TitleDiv"><h1>DEACTIVATED USERS</h1></div>
-        <table id="table2" cellspacing="0" cellpadding="0">
+        <table id="table2" cellspacing="0">
           <tr>
             <th colspan="2">USERNAME</th>
             <th>WINS</th>
@@ -44,7 +44,7 @@
         </table>
       </div>
 
-      <template>
+      <template id="template1">
         <tr class="tableRow">
           <td class="row" id="photoCell">
             <img class="photoTable" alt="img" />
@@ -58,6 +58,9 @@
             <img src="images/remove.png" class="removeButton" alt="remove" />
           </td>
         </tr>
+      </template>
+
+      <template id="template2">
         <div class="warningWrapper">
           <div class="ifDeleteDiv">
             <img src="images/black.close.png" class="warningClose" alt="img" />
@@ -78,7 +81,7 @@
           <img src="images/orange.close.png" class="modalClose" alt="img" />
         </div>
         <div id="userPhotoDiv">
-          <img class="photoModal" alt="img" />
+          <img class="photoModal" alt="img" src="" />
           <h3>
             <span class="modalText1">User name: </span><br />
             <span class="modalText2" id="Username"></span>
@@ -108,7 +111,6 @@
         </div>
       </div>
     </div>
-    >
     <footer></footer>
 
     <script src="index.js"></script>
